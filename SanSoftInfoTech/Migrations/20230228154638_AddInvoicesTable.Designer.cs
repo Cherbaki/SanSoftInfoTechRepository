@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SanSoftInfoTech.Data;
 
@@ -11,9 +12,11 @@ using SanSoftInfoTech.Data;
 namespace SanSoftInfoTech.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230228154638_AddInvoicesTable")]
+    partial class AddInvoicesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,38 +78,6 @@ namespace SanSoftInfoTech.Migrations
                     b.ToTable("Invoices");
                 });
 
-            modelBuilder.Entity("SanSoftInfoTech.Models.LineItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
-
-                    b.Property<int>("InvoiceNumber")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("UnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InvoiceNumber");
-
-                    b.ToTable("LineItems");
-                });
-
             modelBuilder.Entity("SanSoftInfoTech.Models.User", b =>
                 {
                     b.Property<int>("UserId")
@@ -128,22 +99,6 @@ namespace SanSoftInfoTech.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("SanSoftInfoTech.Models.LineItem", b =>
-                {
-                    b.HasOne("SanSoftInfoTech.Models.Invoice", "Invoice")
-                        .WithMany("LineItems")
-                        .HasForeignKey("InvoiceNumber")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Invoice");
-                });
-
-            modelBuilder.Entity("SanSoftInfoTech.Models.Invoice", b =>
-                {
-                    b.Navigation("LineItems");
                 });
 #pragma warning restore 612, 618
         }

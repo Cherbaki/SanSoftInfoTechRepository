@@ -3,7 +3,7 @@ using SanSoftInfoTech.ViewModels;
 
 namespace SanSoftInfoTech.Controllers
 {
-    public class ErrorController : Controller
+    public class ErrorsController : Controller
     {
         public IActionResult ErrorPage(string message)
         {

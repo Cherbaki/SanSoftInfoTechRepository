@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SanSoftInfoTech.Models
+namespace SanSoftInfoTech.ViewModels
 {
     public class LogInVM
     {

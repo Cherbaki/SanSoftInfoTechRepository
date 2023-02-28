@@ -1,10 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization.Infrastructure;
-using Microsoft.AspNetCore.Mvc;
-using NuGet.ProjectModel;
+﻿using Microsoft.AspNetCore.Mvc;
 using SanSoftInfoTech.Data;
 using SanSoftInfoTech.Models;
 using SanSoftInfoTech.Services;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using SanSoftInfoTech.ViewModels;
 
 namespace SanSoftInfoTech.Controllers
 {
@@ -26,10 +24,10 @@ namespace SanSoftInfoTech.Controllers
             {
                 var targetUser = await _usersRepository.GetUserAsync(userName, password);
                 if (targetUser == null)
-                    return RedirectToAction("ErrorPage", "Error", new { message = "User is not found" });
+                    return RedirectToAction("ErrorPage", "Errors", new { message = "User is not found" });
 
                 ProfileInfo.CurrentUser = targetUser;
-                return RedirectToAction("Profile", "Profile");
+                return RedirectToAction("Profile", "Profiles");
             }
 
             return View();
@@ -43,11 +41,11 @@ namespace SanSoftInfoTech.Controllers
 
             var targetUser = await _usersRepository.GetUserAsync(VM.UserName, VM.Password);
             if (targetUser == null)
-                return RedirectToAction("ErrorPage", "Error", new { message = "User is not found" });
+                return RedirectToAction("ErrorPage", "Errors", new { message = "User is not found" });
 
             ProfileInfo.CurrentUser = targetUser;
 
-            return RedirectToAction("Profile", "Profile");
+            return RedirectToAction("Profile", "Profiles");
         }
 
 

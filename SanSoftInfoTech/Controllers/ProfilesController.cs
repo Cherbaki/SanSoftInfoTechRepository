@@ -4,14 +4,14 @@ using SanSoftInfoTech.ViewModels;
 
 namespace SanSoftInfoTech.Controllers
 {
-    public class ProfileController : Controller
+    public class ProfilesController : Controller
     {
 
         public IActionResult Profile()
         {
             var currentUser = ProfileInfo.CurrentUser;
             if(currentUser == null)
-                return RedirectToAction("ErrorPage", "Error", new { message = "User is not found" });
+                return RedirectToAction("ErrorPage", "Errors", new { message = "User is not found" });
 
             var VM = new ProfileVM
             {

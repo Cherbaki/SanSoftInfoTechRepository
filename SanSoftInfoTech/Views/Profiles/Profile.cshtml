@@ -1,0 +1,10 @@
+﻿@model ProfileVM
+
+
+<div class="ProfileInfoSection">
+	<h2>User Name: @Model.CurrentUser.UserName</h2>
+</div>
+
+<div>
+	<a class="btn btn-warning" asp-controller="Invoices" asp-action="CreateInvoice">Create Invoice</a>
+</div>
