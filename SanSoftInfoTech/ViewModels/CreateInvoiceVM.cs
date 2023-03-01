@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SanSoftInfoTech.Models;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.CompilerServices;
 
 namespace SanSoftInfoTech.ViewModels
 {
     public class CreateInvoiceVM
     {
-        [Key]
-        public int InvoiceNumber { get; set; }
         [Required]
         public DateTime InvoiceDate { get; set; }
         [Required]
@@ -20,19 +19,15 @@ namespace SanSoftInfoTech.ViewModels
         public required string CustomerAddress { get; set; }
         [Required]
         [MaxLength(100)]
+        [EmailAddress]
         public required string CustomerEmail { get; set; }
         [Required]
-        [MaxLength(100)]
-        public required string CustomerPhone { get; set; }
-        [Required]
-        public decimal Subtotal { get; set; }
-        [Required]
-        public decimal Taxes { get; set; }
-        [Required]
-        public decimal Total { get; set; }
+        public required int CustomerPhone { get; set; }
         [Required]
         [MaxLength(100)]
         public required string Status { get; set; }
+        [Required]
+        public required decimal TaxValue { get; set; }
 
         public required string LineItemsJSON { get; set; }
     }

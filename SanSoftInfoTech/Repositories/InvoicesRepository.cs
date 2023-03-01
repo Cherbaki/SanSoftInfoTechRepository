@@ -1,4 +1,5 @@
 ﻿using SanSoftInfoTech.Data;
+using SanSoftInfoTech.Models;
 using SanSoftInfoTech.Services;
 
 namespace SanSoftInfoTech.Repositories
@@ -14,7 +15,11 @@ namespace SanSoftInfoTech.Repositories
         }
 
 
-
+        public async Task AddInvoiceToDatabase(Invoice newInvoice)
+        {
+            await _dbContext.Invoices.AddAsync(newInvoice);
+            await _dbContext.SaveChangesAsync();
+        }
 
     }
 }

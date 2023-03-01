@@ -1,5 +1,9 @@
 ﻿@model ProfileVM
 
+@if(TempData["InvoiceAdded"] != null)
+{
+	<h1>Invoice added successfully</h1>
+}
 
 <div class="ProfileInfoSection">
 	<h2>User Name: @Model.CurrentUser.UserName</h2>

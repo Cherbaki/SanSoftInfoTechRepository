@@ -4,83 +4,125 @@
     ViewData["Title"] = "Create Invoice";
 }
 
-<h1>CreateInvoice</h1>
+<h1>Create Invoice</h1>
 
-<hr />
+<link href="~/css/CreateInvoice.css" rel="stylesheet" type="text/css"/>
+
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateInvoice">
+        <form method="post" asp-action="CreateInvoice">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="InvoiceDate" class="control-label"></label>
+                <label asp-for="InvoiceDate" class="control-label">Invoice Date</label>
                 <input asp-for="InvoiceDate" class="form-control" />
                 <span asp-validation-for="InvoiceDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DueDate" class="control-label"></label>
+                <label asp-for="DueDate" class="control-label">Due Date</label>
                 <input asp-for="DueDate" class="form-control" />
                 <span asp-validation-for="DueDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerName" class="control-label"></label>
+                <label asp-for="CustomerName" class="control-label">Customer Name</label>
                 <input asp-for="CustomerName" class="form-control" />
                 <span asp-validation-for="CustomerName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerAddress" class="control-label"></label>
+                <label asp-for="CustomerAddress" class="control-label">Customer Address</label>
                 <input asp-for="CustomerAddress" class="form-control" />
                 <span asp-validation-for="CustomerAddress" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerEmail" class="control-label"></label>
+                <label asp-for="CustomerEmail" class="control-label">Customer Email</label>
                 <input asp-for="CustomerEmail" class="form-control" />
                 <span asp-validation-for="CustomerEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CustomerPhone" class="control-label"></label>
+                <label asp-for="CustomerPhone" class="control-label">Customer Phone</label>
                 <input asp-for="CustomerPhone" class="form-control" />
                 <span asp-validation-for="CustomerPhone" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Subtotal" class="control-label"></label>
-                <input asp-for="Subtotal" class="form-control" />
-                <span asp-validation-for="Subtotal" class="text-danger"></span>
+                <label asp-for="TaxValue" class="control-label">Tax Total</label>
+                <input asp-for="TaxValue" type="number" class="form-control" />
+                <span asp-validation-for="TaxValue" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Taxes" class="control-label"></label>
-                <input asp-for="Taxes" class="form-control" />
-                <span asp-validation-for="Taxes" class="text-danger"></span>
+                <label asp-for="Status" class="control-label">Invoice Status</label>
+                <select asp-for="Status" class="form-control">
+                    <option value="Draft">Draft</option>
+                    <option value="Sent">Sent</option>
+                    <option value="Partially Paid">Partially Paid</option>
+                    <option value="Paid">Paid</option>
+                    <option value="Overdue">Overdue</option>
+                    <option value="Void">Void</option>
+                    <option value="Refunded">Refunded</option>
+                    <option value="Pending">Pending</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label asp-for="Total" class="control-label"></label>
-                <input asp-for="Total" class="form-control" />
-                <span asp-validation-for="Total" class="text-danger"></span>
+
+            <label for="InvoiceItemsDivId">Add Invoice Items</label>
+            <div id="InvoiceItemsDivId" class="form-group mt-3 mb-3">
+
+                <div class="InvoiceItemsDivItem">
+                    <label for="ItemDescriptionIFId" class="control-label">Item Description</label>
+                    <textarea id="ItemDescriptionIFId" class="ItemNumberPorpIF"></textarea>  
+                    <span id="ItemDescriptionSpanId" class="text text-danger span">Description can't be longer then 1000 chracter</span>
+                </div>
+
+                <div class="InvoiceItemsDivItem">
+                    <label for='ItemQuantityIFId'>Quantity</label>
+                    <input id="ItemQuantityIFId" class="ItemNumberPorpIF" type="number" />
+                    <span id="ItemQuantitySpanIFId" class="text text-danger span">Quantity must be specified</span>
+                </div>
+
+                <div class="InvoiceItemsDivItem">
+                    <label for='ItemUnitPriceIFId'>Unit Price</label>
+                    <input id="ItemUnitPriceIFId" type="number" class="ItemNumberPorpIF" />
+                    <span id="ItemUnitPriceSpanIFId" class="text text-danger span">Unit Price must be specified</span>
+                </div>
+
+                <div class="InvoiceItemsDivItem">
+                    <a id="AddItemButtonId" class="btn btn-primary" style="background-color:orange;">Add</a>
+                </div>
+
+                <div class="tableDiv">
+                    <table id="InvoiceItemsTableId">       
+                        <tr>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="InvoiceItemsDivItem">
+                    <span id="InvoiceItemsSpanId" style="display:none;" class="text text-danger span">Invoice must have at least 1 item</span>
+                </div>
+
             </div>
+
             <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LineItemsJSON" class="control-label"></label>
-                <input asp-for="LineItemsJSON" class="form-control" />
+                <input id="LineItemsJSONIFId" asp-for="LineItemsJSON" type="hidden" class="form-control" />
                 <span asp-validation-for="LineItemsJSON" class="text-danger"></span>
             </div>
 
-            
-
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button id="SubmitFormId" class="btn btn-warning" style="display:none;">Submit</button>
+                <a id="CreateInvoiceButtonId" class="btn btn-primary">Create Invoice</a>
             </div>
 
         </form>
     </div>
 </div>
 
-<div>
+<div class="mt-2">
     <a class="btn btn-warning" asp-controller="Profiles" asp-action="Profile">Back To Profile</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@section Scripts{
+    <script src="~/js/CreateInvoice.js"></script>
+    <partial name="_ValidationScriptsPartial" ><</partial>
 }

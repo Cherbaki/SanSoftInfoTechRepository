@@ -27,8 +27,5 @@ namespace SanSoftInfoTech.Data
 
         }
 
-
-        public DbSet<SanSoftInfoTech.ViewModels.CreateInvoiceVM> CreateInvoiceVM { get; set; } = default!;
-
     }
 }

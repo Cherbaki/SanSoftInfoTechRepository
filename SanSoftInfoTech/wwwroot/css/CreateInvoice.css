@@ -1,0 +1,89 @@
+﻿#InvoiceItemsDivId {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    flex-wrap:wrap;
+    row-gap:20px;
+
+    padding: 20px;
+    width: 50vw;
+    height: auto;
+
+    border: solid;
+    border-radius: 10px;
+}
+
+.InvoiceItemsDivItem{
+    width:100%;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+#ItemDescriptionIFId {
+    border-radius: 10px;
+    margin-left: 20px;
+    width: 80%;
+    height:100px;
+}
+
+.ItemNumberPorpIF {
+    border-radius: 10px;
+    margin-left: 67px;
+}
+
+#ItemUnitPricePorpIFId{
+    margin-left:60px;
+}
+
+.span {
+    display: none;
+}
+
+.tableDiv{
+    width:100%;
+}
+
+
+/* Styles for the table */
+#InvoiceItemsTableId {
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: #004440;
+    font-size: 0.9rem;
+}
+
+#InvoiceItemsTableId th, #InvoiceItemsTableId td {
+    padding: 0.75rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+}
+
+#InvoiceItemsTableId th {
+    font-weight: 600;
+}
+
+#InvoiceItemsTableId tbody tr:hover {
+    background-color: #044400;
+}
+
+/* Styles for the table header */
+#InvoiceItemsTableId thead th {
+    text-align: center;
+    background-color: #55DAB8;
+    border-top: none;
+}
+
+/* Styles for the table cells */
+#InvoiceItemsTableId tbody td {
+    text-align: center;
+}
+
+#InvoiceItemsTableId tbody td:first-child {
+    text-align: center;
+}
+
+#InvoiceItemsTableId tbody td:last-child {
+    font-weight: 600;
+}
