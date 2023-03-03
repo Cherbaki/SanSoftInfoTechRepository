@@ -19,6 +19,11 @@ builder.Services.AddScoped<IInvoicesRepository, InvoicesRepository>();
 
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(20);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -33,6 +38,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 

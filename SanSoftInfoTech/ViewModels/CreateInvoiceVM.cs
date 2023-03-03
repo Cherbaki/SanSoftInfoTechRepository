@@ -13,9 +13,6 @@ namespace SanSoftInfoTech.ViewModels
         public DateTime DueDate { get; set; }
         [Required]
         [MaxLength(100)]
-        public required string CustomerName { get; set; }
-        [Required]
-        [MaxLength(100)]
         public required string CustomerAddress { get; set; }
         [Required]
         [MaxLength(100)]

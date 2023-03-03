@@ -33,6 +33,13 @@ namespace SanSoftInfoTech.Repositories
 
             return targetUser;
         }
+		public async Task<User?> GetUserIdAsync(int Id)
+		{
+			var targetUser = await _dbContext.Users
+									.FirstOrDefaultAsync(us => us.UserId == Id);
 
-    }
+			return targetUser;
+		}
+
+	}
 }

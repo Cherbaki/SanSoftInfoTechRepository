@@ -25,6 +25,11 @@ namespace SanSoftInfoTech.Data
                 .WithMany(i => i.LineItems)
                 .HasForeignKey(li => li.InvoiceNumber);
 
+            modelBuilder.Entity<Invoice>()
+                .HasOne(inv => inv.User)
+                .WithMany(us => us.Invoices)
+                .HasForeignKey(inv => inv.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
 
     }

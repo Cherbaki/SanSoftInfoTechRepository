@@ -26,7 +26,8 @@ namespace SanSoftInfoTech.Controllers
                 if (targetUser == null)
                     return RedirectToAction("ErrorPage", "Errors", new { message = "User is not found" });
 
-                ProfileInfo.CurrentUser = targetUser;
+                HttpContext.Session.SetInt32("UserId", targetUser.UserId);
+
                 return RedirectToAction("Profile", "Profiles");
             }
 
@@ -43,11 +44,19 @@ namespace SanSoftInfoTech.Controllers
             if (targetUser == null)
                 return RedirectToAction("ErrorPage", "Errors", new { message = "User is not found" });
 
-            ProfileInfo.CurrentUser = targetUser;
+			HttpContext.Session.SetInt32("UserId", targetUser.UserId);
 
-            return RedirectToAction("Profile", "Profiles");
+
+			return RedirectToAction("Profile", "Profiles");
         }
 
+        [HttpGet]
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Remove("UserId");
+
+            return RedirectToAction("LogIn");
+		}
 
         [HttpGet]
         public IActionResult Register() => View();
@@ -55,7 +64,6 @@ namespace SanSoftInfoTech.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(User newUser)
         {
-            
             //Validate the name and password combination
             var usersWithASameName = _usersRepository.GetUsersByName(newUser.UserName).ToList();
             if(usersWithASameName != null && usersWithASameName.Count > 0)
@@ -72,8 +80,7 @@ namespace SanSoftInfoTech.Controllers
 
             if (!ModelState.IsValid)
                 return View(newUser);
-
-
+            
             //Here everything is valid and we can save the user in the database
             await _usersRepository.AddUserAsync(newUser);
 

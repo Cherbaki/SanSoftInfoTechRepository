@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SanSoftInfoTech.Models
 {
@@ -12,6 +13,9 @@ namespace SanSoftInfoTech.Models
         [Required]
         [MaxLength(50)]
         public required string Password { get; set; }
+
+
+        public ICollection<Invoice>? Invoices { get; set; }
 
     }
 }

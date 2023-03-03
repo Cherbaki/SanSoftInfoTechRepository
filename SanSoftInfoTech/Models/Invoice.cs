@@ -32,9 +32,12 @@ namespace SanSoftInfoTech.Models
         [Required]
         [MaxLength(100)]
         public required string Status { get; set; }
-        
+
 
         [NotMapped]
         public ICollection<LineItem>? LineItems { get; set; }
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
+        public int? UserId { get; set; }
     }
 }

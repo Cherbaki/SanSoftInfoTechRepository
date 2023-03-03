@@ -1,14 +1,43 @@
 ﻿@model ProfileVM
 
+<link href="~/css/Profile.css" rel="stylesheet" type="text/css"/>
+
 @if(TempData["InvoiceAdded"] != null)
 {
-	<h1>Invoice added successfully</h1>
+    <h1>Invoice added successfully</h1>
 }
 
 <div class="ProfileInfoSection">
-	<h2>User Name: @Model.CurrentUser.UserName</h2>
+    <h2>@Model.CurrentUser.UserName</h2>
+</div>
+
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
+    <a style="background-color: #f0ad4e; border-color: #f0ad4e; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none;" asp-controller="Users" asp-action="LogOut">Log Out</a>
+
+    <a style="background-color: #f0ad4e; border-color: #f0ad4e; color: #fff; padding: 10px 20px; border-radius: 5px; text-decoration: none;" asp-controller="Invoices" asp-action="CreateInvoice">Create Invoice</a>
 </div>
 
 <div>
-	<a class="btn btn-warning" asp-controller="Invoices" asp-action="CreateInvoice">Create Invoice</a>
+    @if(Model.MiniInvoiceVMs != null){
+        <h1>Invoices</h1>
+        <div class="row">
+            @foreach(var item in Model.MiniInvoiceVMs)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-4 miniInvoicesDiv">
+                    <a asp-action="InvoicePage" asp-controller="Invoices" asp-route-invoiceNumber="@item.InvoiceNumber">
+                        <div style="background-color: #333; color: #fff; padding: 20px; border-radius: 5px;">
+                            <h5>@item.CustomerName</h5>
+                            <p>@item.CustomerAddress</p>
+                            <p>@item.CustomerEmail</p>
+                            <p>@item.CustomerPhone</p>
+                            <h5>Total: @item.Total</h5>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    }
+    else{
+        <h1>There are no invoices</h1>
+    }
 </div>
